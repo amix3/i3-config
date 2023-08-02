@@ -14,7 +14,7 @@ COLOR=""
 if [[ "${BATTERY_STATE}" = "Charging" ]]; then
   	if [[ "${BATTERY_POWER}" -le 94 ]]; then
 		ICON=""
-  		COLOR="#ddd0c0"
+  		COLOR="#d4be98"
 	else
 		ICON=""
   		COLOR="#55CC55"
@@ -27,23 +27,23 @@ elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
 	elif [[ "${BATTERY_POWER}" -le 25 ]]; then
 		# 10 < BATTERY < 25
 		ICON=""
-		COLOR="#ddd0c0"
+		COLOR="#d4be98"
 	elif [[ "${BATTERY_POWER}" -le 50 ]]; then
 		# 25 < BATTERY < 50
 		ICON=""
-		COLOR="#ddd0c0"
+		COLOR="#d4be98"
 	elif [[ "${BATTERY_POWER}" -le 75 ]]; then
 		# 50 < BATTERY < 75
 		ICON=""
-		COLOR="#ddd0c0"
+		COLOR="#d4be98"
 	else 
 		# 75 < BATTERY
 		ICON=""
-		COLOR="#ddd0c0"
+		COLOR="#d4be98"
 	fi
 else
 	ICON=""
-  	COLOR="#ddd0c0"
+  	COLOR="#d4be98"
 fi
 
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then

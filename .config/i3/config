@@ -54,8 +54,8 @@ new_window pixel 2
 # hide_edge_borders both
 
 # Set inner/outer gaps
-gaps inner 6
-gaps outer 0
+gaps inner 0
+gaps outer 6
 
 # show window title bars (not officially supported with i3gaps)
 #default_border normal
@@ -181,13 +181,13 @@ bindsym $mod+r mode "resize"
 ######################################
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+t exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
 
 # exit-menu
-bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/powermenu.sh
+bindsym $mod+p exec ~/.config/rofi/powermenu/powermenu.sh
 
 # Lock the system
 # lock with a picture:
@@ -290,13 +290,12 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# Redirect sound to headphones
-bindsym $mod+p exec /usr/local/bin/switch-audio-port
-
 ## App shortcuts
 bindsym $mod+w exec /usr/bin/firefox
 bindsym $mod+n exec /usr/bin/thunar
 bindsym Print exec "scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png"
+bindsym $mod+Print exec "flameshot gui"
+
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
@@ -369,8 +368,8 @@ bindsym $mod+Shift+g exec ~/.config/i3/scripts/picom-toggle
 # autostart applications/services on login: #
 #############################################
 
-#get auth work with polkit-gnome
-exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
+#get auth work with lxpolkit (install lxpolkit or lxsession)
+exec_always --no-startup-id lxpolkit
 
 # dex execute .desktop files
 # keep in mind that it can cause issues
@@ -385,9 +384,9 @@ exec --no-startup-id dex --autostart --environment i3
 
 # num lock activated
 exec --no-startup-id numlockx on
-# configure multiple keyboard layouts and hotkey to switch (Alt+CAPSLOCK in this example)
+# configure multiple keyboard layouts and hotkey to switch (right ctrl+ right shift in this example)
 #exec --no-startup-id setxkbmap -layout us,ir  -option grp:alt_shift_toggle
-exec_always --no-startup-id  "setxkbmap -model pc104 -layout us,ir -variant ,, -option grp:alt_shift_toggle"
+exec_always --no-startup-id  "setxkbmap -model pc104 -layout us,ir -variant ,, -option grp:rctrl_rshift_toggle"
 
 # start conky:
 #exec_always --no-startup-id conky
@@ -398,7 +397,7 @@ exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
 exec --no-startup-id sleep 2 && nitrogen --restore
-#exec --no-startup-id feh --bg-fill /usr/share/endeavouros/backgrounds/endeavouros_i3.png
+#exec --no-startup-id feh --bg-fill ~/.config/i3/gruvbox.png
 
 # set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
@@ -475,7 +474,7 @@ set $black		#181818
 set $purple		#ddd0c0
 set $darkgrey		#282828e6
 set $brown		#3c3836
-set $grey		#ddd0c0
+set $grey		#d4be98
 set $green		#8ec07c
 set $mediumgrey		#665c54
 set $yellowbrown	#e1b700
@@ -512,9 +511,9 @@ strip_workspace_numbers yes
 		    colors {
 		    separator          $purple
 		    background         $darkgrey
-		    statusline         $white
+		    statusline         $grey
 #                          		border 		        bg		txt		indicator
-		focused_workspace	$grey  	   	$darkgrey  	$grey   	$purple
+		focused_workspace	$grey  	        	$darkgrey  	$grey   	$purple
 		active_workspace	$lightblue      	$darkgrey	$darkgrey	$purple
 		inactive_workspace	$mediumgrey   		$darkgrey       $grey		$purple
 		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
@@ -540,8 +539,8 @@ bar {
    tray_output primary
    workspace_buttons no
   colors {
-        statusline $white
-         background        "#282828"
+        statusline      $grey
+         background     $darkgrey
          }  
 }
 #binding for toggling hidden bar
@@ -605,7 +604,5 @@ bindsym $mod+Mod1+d exec warp-cli disconnect
 
 #chromium
 bindsym $mod+m exec chromium --use-gl=desktop --enable-features=VaapiVideoDecoder
-#telegram
-bindsym $mod+t exec telegram-desktop
 #smplayer
 bindsym $mod+x exec smplayer
